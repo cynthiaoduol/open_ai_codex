@@ -37,16 +37,15 @@ const typeText = (element, text) => {
 // generate unique ID for each message div of bot
 // necessary for typing text effect for that specific reply
 // without unique ID, typing text will work on every element
-const generateUniqueId=()=>{
+const generateUniqueId = () => {
   const timestamp = Date.now();
   const randomNumber = Math.random();
   const hexadecimalString = randomNumber.toString(16);
 
   return `id-${timestamp}-${hexadecimalString}`;
-}
+};
 
-
-const chatStripe=(isAi, value, uniqueId)=> {
+const chatStripe = (isAi, value, uniqueId) => {
   return `
         <div class="wrapper ${isAi && "ai"}">
             <div class="chat">
@@ -60,4 +59,34 @@ const chatStripe=(isAi, value, uniqueId)=> {
             </div>
         </div>
     `;
-}
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // Get the data typed in the form
+  const data = new FormData(form);
+
+  // User's chatstripe
+  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+
+  form.reset();
+
+  //bot's chatstripe
+  const uniqueId = generateUniqueId();
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
+
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  // fetch the newly created div
+  const messageDiv = document.getElementById(uniqueId);
+
+  loader(messageDiv);
+};
+
+form.addEventListener("submit", handleSubmit);
+// enter button
+form.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    handleSubmit(e);
+  }
+});
