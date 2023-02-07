@@ -1,23 +1,23 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import { setupCounter } from './counter.js'
+import bot from "./assets/bot.svg";
+import user from "./assets/user.svg";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const form = document.querySelector("form");
+const chatContainer = document.querySelector("#chat_container");
 
-setupCounter(document.querySelector('#counter'))
+let loadInterval;
+
+const loader = (element) => {
+  // Ensure that it is empty at the start
+  element.textContent = "";
+
+  loadInterval = setInterval(() => {
+    // Update the text content of the loading indicator every 300ms
+    element.textContent += ".";
+
+    // If the loading indicator has reached three dots, reset it
+    if (element.textContent === "....") {
+      element.textContent = "";
+    }
+  }, 300);
+};
+
