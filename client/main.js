@@ -84,14 +84,14 @@ const handleSubmit = async (e) => {
 
 
   //fetch data from the server
-  const response = await fetch("http://localhost:5000/", {
+  const response = await fetch("https://open-ai-codex-eilk.onrender.com/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body:JSON.stringify({
-      prompt:data.get("prompt")
-    })
+    body: JSON.stringify({
+      prompt: data.get("prompt"),
+    }),
   });
 
   clearInterval(loadInterval)
