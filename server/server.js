@@ -34,11 +34,11 @@ app.post("/", async (req, res) => {
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `${prompt}`,
-      temperature: 0,
-      max_tokens: 3000,
+      prompt: `${prompt}`, // The prompt to start completing from
+      temperature: 0, // A measure of randomness
+      max_tokens: 3000, // The maximum number of tokens to be generated
       top_p: 1,
-      frequency_penalty: 0.5,
+      frequency_penalty: 0.5,  //less likely to repeat a similar response often
       presence_penalty: 0,
     });
 
